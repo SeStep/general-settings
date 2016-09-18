@@ -1,0 +1,23 @@
+{
+  "name": "sestep/settings-interface",
+  "description": "Interface for general-purpose sestep/settings implementations",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Thoronir42",
+      "email": "Thoronir42@Gmail.com"
+    }
+  ],
+  "autoload": {
+    "classmap": [
+      "src/"
+    ]
+  },
+  "require": {
+    "php": ">=5.4"
+  },
+  "suggest": {
+    "sestep/settings-doctrine": "Doctrine implementation"
+  }
+}
