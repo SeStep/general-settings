@@ -29,7 +29,7 @@ abstract class ASettings
             'options' => $section->getOptions(),
             'subsections' => [],
         ];
-        foreach ($section->getSubsections() as $subsection) {
+        foreach ($section->getSections() as $subsection) {
             $entry['subsections'][$subsection->getDomain()] = $this->crawlSection($subsection);
         }
 
