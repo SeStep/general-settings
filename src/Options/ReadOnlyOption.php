@@ -28,7 +28,14 @@ final class ReadOnlyOption implements IOption
      */
     public function setValue($value)
     {
-        throw new \LogicException("Calling setValue on " . __CLASS__ .  " is not permitted. To set value, use set " .
+        throw new \LogicException("Calling setValue on " . __CLASS__ . " is not permitted. To set value, use set " .
             "method on corresponding " . IOptions::class . ' implementation');
+    }
+
+    public function __call($name, $arguments)
+    {
+        $object = method_exists($this, $name) ? $this : $this->option;
+
+        call_user_func([$object, $name], $arguments);
     }
 }

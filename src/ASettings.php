@@ -4,6 +4,7 @@ namespace SeStep\SettingsInterface;
 
 use SeStep\SettingsInterface\Options\IOptions;
 use SeStep\SettingsInterface\Options\IOptionsContainer;
+use SeStep\SettingsInterface\Options\ReadOnlyOption;
 
 abstract class ASettings
 {
@@ -18,7 +19,7 @@ abstract class ASettings
     /**
      * @return mixed[]
      */
-    public function fetchAll()
+    public function findAll()
     {
         return $this->crawlSection($this->options);
     }
@@ -34,6 +35,10 @@ abstract class ASettings
         }
 
         return $entry;
+    }
+
+    public function getOption($name){
+        return new ReadOnlyOption($this->options->getOption($name));
     }
 
     /**
