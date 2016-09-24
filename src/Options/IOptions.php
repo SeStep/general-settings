@@ -3,7 +3,7 @@
 namespace SeStep\SettingsInterface\Options;
 
 
-interface IOptions extends IOptionsContainer
+interface IOptions extends IOptionsSection
 {
     const TYPE_STRING = 'string';
     const TYPE_BOOL = 'bool';
@@ -16,4 +16,11 @@ interface IOptions extends IOptionsContainer
      */
     public function getOption($name, $domain = '');
 
+    /**
+     * @param mixed $value
+     * @param IOption|string $option
+     * @param $domain
+     * @return void
+     */
+    public function setValue($value, $option, $domain = '');
 }

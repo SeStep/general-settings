@@ -14,6 +14,19 @@ final class ReadOnlyOption implements IOption
     }
 
     /**
+     * This magic call method exists to support specific implementations of IOption interface
+     *
+     * @param $name
+     * @param array $arguments
+     */
+    public function __call($name, $arguments = [])
+    {
+        $object = method_exists($this, $name) ? $this : $this->option;
+
+        return call_user_func([$object, $name], $arguments);
+    }
+
+    /**
      * Returns value of this option
      * @return mixed
      */
@@ -32,10 +45,66 @@ final class ReadOnlyOption implements IOption
             "method on corresponding " . IOptions::class . ' implementation');
     }
 
-    public function __call($name, $arguments)
+    public function getCaption()
     {
-        $object = method_exists($this, $name) ? $this : $this->option;
+        return $this->option->getCaption();
+    }
 
-        call_user_func([$object, $name], $arguments);
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->option->getName();
+    }
+
+    /**
+     * @param string $name
+     * @return void
+     */
+    public function setName($name)
+    {
+        $this->option->setName($name);
+    }
+
+    /**
+     * @return string
+     */
+    public function getDomain()
+    {
+        return $this->option->getDomain();
+    }
+
+    /**
+     * Returns fully qualified name. That is in most cases concatenated getDomain() and getName().
+     * @return mixed
+     */
+    public function getFQN()
+    {
+        return $this->option->getFQN();
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->option->getType();
+    }
+
+    /**
+     * @return boolean
+     */
+    public function hasValues()
+    {
+        return $this->option->hasValues();
+    }
+
+    /**
+     * @return string[]|int[]
+     */
+    public function getValues()
+    {
+        return $this->option->getValues();
     }
 }

@@ -3,15 +3,12 @@
 namespace SeStep\SettingsInterface\Options;
 
 
-interface IOption
+use SeStep\SettingsInterface\IDomainIdentifiable;
+
+interface IOption extends IDomainIdentifiable
 {
 
     public function getCaption();
-
-    /**
-     * @return string
-     */
-    public function getName();
 
     /**
      * @param string $name
@@ -19,16 +16,6 @@ interface IOption
      */
     public function setName($name);
 
-    /**
-     * @return string
-     */
-    public function getDomain();
-
-    /**
-     * Returns fully qualified name. That is in most cases concatenated getDomain() and getName().
-     * @return mixed
-     */
-    public function getFQN();
 
     /**
      * Returns value of this option

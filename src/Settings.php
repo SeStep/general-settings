@@ -3,13 +3,12 @@
 namespace SeStep\SettingsInterface;
 
 use SeStep\SettingsInterface\Options\IOptions;
-use SeStep\SettingsInterface\Options\IOptionsContainer;
 use SeStep\SettingsInterface\Options\ReadOnlyOption;
 
-abstract class ASettings
+class Settings
 {
     /** @var IOptions */
-    private $options;
+    public $options;
 
     public function __construct(IOptions $options)
     {
@@ -17,27 +16,15 @@ abstract class ASettings
     }
 
     /**
-     * @return mixed[]
+     * @return LazySettingsIterator
      */
     public function findAll()
     {
-        return $this->crawlSection($this->options);
+        return new LazySettingsIterator($this->options);
     }
 
-    private function crawlSection(IOptionsContainer $section)
+    public function getOption($name)
     {
-        $entry = [
-            'options' => $section->getOptions(),
-            'subsections' => [],
-        ];
-        foreach ($section->getSections() as $subsection) {
-            $entry['subsections'][$subsection->getDomain()] = $this->crawlSection($subsection);
-        }
-
-        return $entry;
-    }
-
-    public function getOption($name){
         return new ReadOnlyOption($this->options->getOption($name));
     }
 
