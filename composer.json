@@ -1,6 +1,6 @@
 {
-  "name": "sestep/settings-interface",
-  "description": "Interface for general-purpose sestep/settings implementations",
+  "name": "sestep/general-settings",
+  "description": "Interface for general-purpose settings of various things",
   "type": "library",
   "license": "MIT",
   "authors": [

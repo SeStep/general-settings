@@ -2,7 +2,7 @@
 
 namespace SeStep\SettingsInterface;
 
-use Nette\InvalidArgumentException;
+use InvalidArgumentException;
 use SeStep\SettingsInterface\Options\IOptionsSection;
 
 class DomainLocator implements IDomainIdentifiable

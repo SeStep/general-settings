@@ -21,6 +21,13 @@ interface IOptionsSection extends IDomainIdentifiable
     public function getOptions();
 
     /**
+     * @param IOption|string $option
+     * @param string $domain
+     * @return mixed
+     */
+    public function getValue($option, $domain = '');
+
+    /**
      * @return IOptionsSection[]
      */
     public function getSections();
@@ -31,11 +38,4 @@ interface IOptionsSection extends IDomainIdentifiable
      * @throws OptionsSectionNotFoundException
      */
     public function getSection($domain);
-
-    /**
-     * @param IOption|string $option
-     * @param string $domain
-     * @return mixed
-     */
-    public function getValue($option, $domain = '');
 }

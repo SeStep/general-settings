@@ -6,6 +6,7 @@ namespace SeStep\SettingsInterface;
 use Nette\InvalidArgumentException;
 use Nette\MemberAccessException;
 use RuntimeException;
+use SeStep\SettingsInterface\Exceptions\IllegalAccessException;
 use SeStep\SettingsInterface\Exceptions\OptionsSectionNotFoundException;
 use SeStep\SettingsInterface\Options\IOption;
 use SeStep\SettingsInterface\Options\IOptionsSection;
@@ -64,7 +65,7 @@ class LazySettingsIterator implements IOptionsSection
      */
     public function setValue($value, $option, $domain = '')
     {
-        throw new MemberAccessException("Option value can not be set via " . __CLASS__);
+        throw new IllegalAccessException("Option value can not be set via " . __CLASS__);
     }
 
     /**
