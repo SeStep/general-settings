@@ -3,7 +3,7 @@
 namespace SeStep\SettingsInterface\Options;
 
 
-use SeStep\SettingsInterface\Exceptions\OptionsSectionNotFoundException;
+use SeStep\SettingsInterface\Exceptions\NotFoundException;
 use SeStep\SettingsInterface\IDomainIdentifiable;
 
 interface IOptionsSection extends IDomainIdentifiable
@@ -35,7 +35,7 @@ interface IOptionsSection extends IDomainIdentifiable
     /**
      * @param string $domain
      * @return IOptionsSection
-     * @throws OptionsSectionNotFoundException
+     * @throws NotFoundException
      */
     public function getSection($domain);
 }

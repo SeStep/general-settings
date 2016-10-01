@@ -4,10 +4,9 @@ namespace SeStep\SettingsInterface;
 
 
 use Nette\InvalidArgumentException;
-use Nette\MemberAccessException;
 use RuntimeException;
 use SeStep\SettingsInterface\Exceptions\IllegalAccessException;
-use SeStep\SettingsInterface\Exceptions\OptionsSectionNotFoundException;
+use SeStep\SettingsInterface\Exceptions\NotFoundException;
 use SeStep\SettingsInterface\Options\IOption;
 use SeStep\SettingsInterface\Options\IOptionsSection;
 use SeStep\SettingsInterface\Options\ReadOnlyOption;
@@ -28,7 +27,10 @@ class LazySettingsIterator implements IOptionsSection
         $this->domain = $domain;
     }
 
-    /** @return ReadOnlyOption[] */
+    /**
+     * @param bool $clean forces optios reload
+     * @return Options\ReadOnlyOption[]
+     */
     public function getOptions($clean = false)
     {
         if ($clean || !$this->options) {
@@ -43,7 +45,8 @@ class LazySettingsIterator implements IOptionsSection
     }
 
     /**
-     * @return IOptionsSection[]
+     * @param bool $clean forces sections reload
+     * @return Options\IOptionsSection[]
      */
     public function getSections($clean = false)
     {
@@ -55,17 +58,6 @@ class LazySettingsIterator implements IOptionsSection
         }
 
         return $this->sections;
-    }
-
-    /**
-     * @param mixed $value
-     * @param IOption|string $option
-     * @param $domain
-     * @return void
-     */
-    public function setValue($value, $option, $domain = '')
-    {
-        throw new IllegalAccessException("Option value can not be set via " . __CLASS__);
     }
 
     /**
@@ -87,7 +79,7 @@ class LazySettingsIterator implements IOptionsSection
     {
         $sections = $this->getSections();
         if (!isset($sections[$domain])) {
-            throw new OptionsSectionNotFoundException($domain, $this->domain);
+            throw NotFoundException::section($domain, $this->domain);
         }
 
         return new LazySettingsIterator($sections[$domain], DomainLocator::concatFQN($domain, $this->domain));
@@ -101,15 +93,6 @@ class LazySettingsIterator implements IOptionsSection
     public function getOption($name, $domain = '')
     {
         return $this->getOptions()[$name];
-    }
-
-    /**
-     * @param IOption|string $option
-     * @return void
-     */
-    public function removeOption($option, $domain = '')
-    {
-        throw new InvalidArgumentException("Iterator must not modify the source");
     }
 
     /**
