@@ -4,6 +4,7 @@ namespace SeStep\SettingsInterface\Options;
 
 
 use SeStep\SettingsInterface\IDomainIdentifiable;
+use SeStep\SettingsInterface\Pools\IPool;
 
 interface IOption extends IDomainIdentifiable
 {
@@ -35,6 +36,12 @@ interface IOption extends IDomainIdentifiable
      * @return string
      */
     public function getType();
+
+    /**
+     * @param IPool|null $pool
+     * @return void
+     */
+    public function setPool($pool);
 
     /**
      * @return boolean

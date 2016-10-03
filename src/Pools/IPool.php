@@ -2,19 +2,13 @@
 
 namespace SeStep\SettingsInterface\Pools;
 
+use SeStep\SettingsInterface\Exceptions\NotFoundException;
 
 interface IPool
 {
-    public function __construct($type);
-
-    /**
-     * @return IPoolItem[]
-     */
-    public function listItems();
-
     /**
      * @param mixed $key
-     * @throws
+     * @throws NotFoundException
      * @return mixed
      */
     public function get($key);
@@ -33,10 +27,20 @@ interface IPool
     public function setMany($values);
 
     /**
+     * @return mixed[] key-value array
+     */
+    public function getValues();
+
+    /**
      * @param mixed $key
      * @return mixed|null previously set value
      */
-    public function clear($key);
+    public function remove($key);
+
+    /**
+     * @return mixed[] key-value array
+     */
+    public function clear();
 
     /**
      * @return int

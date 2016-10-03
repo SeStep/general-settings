@@ -16,6 +16,11 @@ class NotFoundException extends AOptionsException
         return new NotFoundException("Pool $name could not be found");
     }
 
+    public static function poolValue($name, $key)
+    {
+        return new NotFoundException("Pool $name does not contain offset '$key'");
+    }
+
     /**
      * @param $name
      * @param string $domain
@@ -24,6 +29,7 @@ class NotFoundException extends AOptionsException
     public static function option($name, $domain = '')
     {
         $fqn = DomainLocator::concatFQN($name, $domain);
+
         return new NotFoundException("Option $fqn was not found");
     }
 
@@ -37,6 +43,7 @@ class NotFoundException extends AOptionsException
         if ($domain instanceof IDomainIdentifiable) {
             $domain = $domain->getFQN();
         }
+
         return new NotFoundException("Section $domain was not found" . ($parent ? " in $parent" : ''));
     }
 }

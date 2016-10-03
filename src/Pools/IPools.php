@@ -10,7 +10,7 @@ interface IPools
     /**
      * @return IPool[]
      */
-    public function listAll();
+    public function findAll();
 
     /**
      * @param string $name
@@ -28,7 +28,7 @@ interface IPools
     /**
      * @param string $name
      * @param mixed $key
-     * @throws
+     * @throws NotFoundException
      * @return mixed
      */
     public function getValue($name, $key);

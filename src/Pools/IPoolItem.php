@@ -8,11 +8,21 @@ interface IPoolItem
     /**
      * @return mixed
      */
-    public function get();
+    public function getKey();
+
+    /**
+     * @return mixed
+     */
+    public function getValue();
 
     /**
      * @param mixed $value
-     * @return mixed previous value
+     * @return mixed|null previous value
      */
-    public function set($value);
+    public function setValue($value);
+
+    /**
+     * @return string
+     */
+    public function getCaption();
 }
