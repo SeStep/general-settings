@@ -16,8 +16,9 @@ final class ReadOnlyOption implements IOption
     /**
      * This magic call method exists to support specific implementations of IOption interface
      *
-     * @param $name
-     * @param array $arguments
+     * @param string $name
+     * @param array  $arguments
+     * @return mixed
      */
     public function __call($name, $arguments = [])
     {
@@ -28,6 +29,7 @@ final class ReadOnlyOption implements IOption
 
     /**
      * Returns value of this option
+     *
      * @return mixed
      */
     public function getValue()
@@ -37,12 +39,12 @@ final class ReadOnlyOption implements IOption
 
     /**
      * Sets value to this option
+     *
      * @return mixed
      */
     public function setValue($value)
     {
-        throw new \LogicException("Calling setValue on " . __CLASS__ . " is not permitted. To set value, use set " .
-            "method on corresponding " . IOptions::class . ' implementation');
+        throw new \LogicException("Calling setValue on " . __CLASS__ . " is not permitted. To set value, use set " . "method on corresponding " . IOptions::class . ' implementation');
     }
 
     public function getCaption()
@@ -77,6 +79,7 @@ final class ReadOnlyOption implements IOption
 
     /**
      * Returns fully qualified name. That is in most cases concatenated getDomain() and getName().
+     *
      * @return mixed
      */
     public function getFQN()

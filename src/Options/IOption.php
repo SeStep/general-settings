@@ -20,14 +20,14 @@ interface IOption extends IDomainIdentifiable
 
     /**
      * Returns value of this option
-     * @return mixed
+     * @return int|string
      */
     public function getValue();
 
     /**
      * Sets value to this option
      *
-     * @param string $value
+     * @param int|string $value
      * @return void
      */
     public function setValue($value);
@@ -36,12 +36,6 @@ interface IOption extends IDomainIdentifiable
      * @return string
      */
     public function getType();
-
-    /**
-     * @param IPool|null $pool
-     * @return void
-     */
-    public function setPool($pool);
 
     /**
      * @return boolean
