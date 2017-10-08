@@ -33,10 +33,10 @@ class DomainLocator implements IDomainIdentifiable
         $this->depth = count($nameParts);
 
         $this->name = array_pop($nameParts);
-        $this->domain = implode(IOptionsSection::DOMAIN_DELIMITER, $nameParts);
+        $this->domain = $nameParts ? implode(IOptionsSection::DOMAIN_DELIMITER, $nameParts) : null;
 
         $this->domainStart = array_shift($domainParts);
-        $this->domainRest = implode(IOptionsSection::DOMAIN_DELIMITER, $domainParts);
+        $this->domainRest = $domainParts ? implode(IOptionsSection::DOMAIN_DELIMITER, $domainParts) : null;
     }
 
     /**
